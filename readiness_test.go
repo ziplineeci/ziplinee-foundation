@@ -13,9 +13,9 @@ func TestInitReadiness(t *testing.T) {
 	t.Run("Returns200OK", func(t *testing.T) {
 
 		// act
-		InitReadinessWithPort(5001)
+		InitReadinessWithPort(5002)
 
-		resp, err := pester.Get("http://localhost:5001/readiness")
+		resp, err := pester.Get("http://localhost:5002/readiness")
 
 		if assert.Nil(t, err) {
 

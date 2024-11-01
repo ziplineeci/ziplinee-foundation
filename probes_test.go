@@ -14,9 +14,9 @@ func TestInitLivenessAndReadiness(t *testing.T) {
 	t.Run("Returns200OKForLiveness", func(t *testing.T) {
 
 		// act
-		InitLivenessAndReadinessWithPort(5002)
+		InitLivenessAndReadinessWithPort(5003)
 
-		resp, err := pester.Get("http://localhost:5002/liveness")
+		resp, err := pester.Get("http://localhost:5003/liveness")
 
 		if assert.Nil(t, err) {
 
@@ -34,9 +34,9 @@ func TestInitLivenessAndReadiness(t *testing.T) {
 	t.Run("Returns200OKForReadiness", func(t *testing.T) {
 
 		// act
-		InitLivenessAndReadinessWithPort(5003)
+		InitLivenessAndReadinessWithPort(5004)
 
-		resp, err := http.Get("http://localhost:5003/readiness")
+		resp, err := http.Get("http://localhost:5004/readiness")
 
 		if assert.Nil(t, err) {
 

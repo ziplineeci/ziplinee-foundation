@@ -13,9 +13,9 @@ func TestInitLiveness(t *testing.T) {
 	t.Run("Returns200OK", func(t *testing.T) {
 
 		// act
-		InitLivenessWithPort(5000)
+		InitLivenessWithPort(5001)
 
-		resp, err := pester.Get("http://localhost:5000/liveness")
+		resp, err := pester.Get("http://localhost:5001/liveness")
 
 		if assert.Nil(t, err) {
 
