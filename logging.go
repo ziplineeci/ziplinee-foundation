@@ -25,9 +25,9 @@ const (
 	LogFormatV3 = "v3"
 )
 
-// InitLoggingFromEnv initalializes a logger with format specified in envvar ESTAFETTE_LOG_FORMAT and outputs a startup message
+// InitLoggingFromEnv initalializes a logger with format specified in envvar ZIPLINEE_LOG_FORMAT and outputs a startup message
 func InitLoggingFromEnv(applicationInfo ApplicationInfo) {
-	InitLoggingByFormat(applicationInfo, os.Getenv("ESTAFETTE_LOG_FORMAT"))
+	InitLoggingByFormat(applicationInfo, os.Getenv("ZIPLINEE_LOG_FORMAT"))
 }
 
 // InitLoggingByFormat initalializes a logger with specified format and outputs a startup message
@@ -66,9 +66,9 @@ func InitLoggingByFormatSilent(applicationInfo ApplicationInfo, logFormat string
 	}
 }
 
-// SetLoggingLevelFromEnv sets the logging level from which log messages and higher are outputted via envvar ESTAFETTE_LOG_LEVEL
+// SetLoggingLevelFromEnv sets the logging level from which log messages and higher are outputted via envvar ZIPLINEE_LOG_LEVEL
 func SetLoggingLevelFromEnv() {
-	logLevel := os.Getenv("ESTAFETTE_LOG_LEVEL")
+	logLevel := os.Getenv("ZIPLINEE_LOG_LEVEL")
 
 	switch strings.ToLower(logLevel) {
 	case "disabled":
@@ -221,7 +221,7 @@ func initLoggingV3(applicationInfo ApplicationInfo) {
 	log.Logger = zerolog.New(os.Stdout).Hook(messageIDHook{}).With().
 		Timestamp().
 		Str("logformat", "v3").
-		Str("messagetype", "estafette").
+		Str("messagetype", "ziplinee").
 		Str("messagetypeversion", "0.0.0").
 		Interface("source", source).
 		Logger()
@@ -240,7 +240,7 @@ func initLoggingV3(applicationInfo ApplicationInfo) {
 	stdlog.SetOutput(log.Logger)
 }
 
-// logStartupMessage logs a default startup message for any Estafette application
+// logStartupMessage logs a default startup message for any Ziplinee application
 func logStartupMessage(applicationInfo ApplicationInfo) {
 	log.Info().
 		Str("branch", applicationInfo.Branch).
@@ -251,7 +251,7 @@ func logStartupMessage(applicationInfo ApplicationInfo) {
 		Msgf("Starting %v version %v...", applicationInfo.App, applicationInfo.Version)
 }
 
-// logStartupMessageConsole logs a default startup message for any Estafette application in bold
+// logStartupMessageConsole logs a default startup message for any Ziplinee application in bold
 func logStartupMessageConsole(applicationInfo ApplicationInfo) {
 	log.Info().
 		Str("branch", applicationInfo.Branch).
@@ -262,7 +262,7 @@ func logStartupMessageConsole(applicationInfo ApplicationInfo) {
 		Msg(aurora.Sprintf("Starting %v version %v...", aurora.Bold(applicationInfo.App), aurora.Bold(applicationInfo.Version)))
 }
 
-// logStartupMessageV3 logs a v3 startup message for any Estafette application
+// logStartupMessageV3 logs a v3 startup message for any Ziplinee application
 func logStartupMessageV3(applicationInfo ApplicationInfo) {
 	startupProps := struct {
 		Branch    string `json:"branch"`

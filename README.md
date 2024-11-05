@@ -1,22 +1,22 @@
-# Estafette
+# Ziplinee
 
-The `estafette-foundation` library is part of the Estafette CI system documented at https://estafette.io.
+The `ziplinee-foundation` library is part of the Ziplinee CI system documented at https://ziplinee.io.
 
-Please file any issues related to Estafette CI at https://github.com/estafette/estafette-ci-central/issues
+Please file any issues related to Ziplinee CI at https://github.com/ziplineeci/ziplinee-ci-central/issues
 
-## Estafette-foundation
+## Ziplinee-foundation
 
 This library provides building blocks for creating
 
-This library has contracts for requests / responses between various components of the Estafette CI system.
+This library has contracts for requests / responses between various components of the Ziplinee CI system.
 
 ## Development
 
 To start development run
 
 ```bash
-git clone git@github.com:estafette/estafette-foundation.git
-cd estafette-foundation
+git clone git@github.com:ziplineeci/ziplinee-foundation.git
+cd ziplinee-foundation
 ```
 
 Before committing your changes run
@@ -31,13 +31,13 @@ go mod tidy
 To add this module to your golang application run
 
 ```bash
-go get github.com/estafette/estafette-foundation
+go get github.com/ziplineeci/ziplinee-foundation
 ```
 
 ### Initialize logging
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 foundation.InitLogging(app, version, branch, revision, buildDate)
 ```
@@ -45,7 +45,7 @@ foundation.InitLogging(app, version, branch, revision, buildDate)
 ### Initialize Prometheus metrics endpoint
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 foundation.InitMetrics()
 ```
@@ -53,7 +53,7 @@ foundation.InitMetrics()
 ### Handle graceful shutdown
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 gracefulShutdown, waitGroup := foundation.InitGracefulShutdownHandling()
 
@@ -66,7 +66,7 @@ foundation.HandleGracefulShutdown(gracefulShutdown, waitGroup)
 ### Watch mounted folder for changes
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 foundation.WatchForFileChanges("/path/to/mounted/secret/or/configmap", func(event fsnotify.Event) {
   // reinitialize parts making use of the mounted data
@@ -78,7 +78,7 @@ foundation.WatchForFileChanges("/path/to/mounted/secret/or/configmap", func(even
 Inspired by http://highscalability.com/blog/2012/4/17/youtube-strategy-adding-jitter-isnt-a-bug.html you want to add jitter to a lot of parts of your platform, like cache durations, polling intervals, etc.
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 sleepTime := foundation.ApplyJitter(30)
 time.Sleep(time.Duration(sleepTime) * time.Second)
@@ -89,7 +89,7 @@ time.Sleep(time.Duration(sleepTime) * time.Second)
 In order to retry a function you can use the `Retry` function to which you can pass a retryable function with signature `func() error`:
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 foundation.Retry(func() error { do something that can fail })
 ```
@@ -99,7 +99,7 @@ Without passing any additional options it will by default try 3 times, with expo
 In order to override the defaults you can pass them in with the following options:
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 foundation.Retry(func() error { do something that can fail }, Attempts(5), DelayMillisecond(10), Fixed())
 ```
@@ -120,7 +120,7 @@ The following options can be passed in:
 You can also override any of the config properties by passing in a custom option with signature `func(*RetryConfig)`, which could look like:
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 isRetryableErrorCustomOption := func(c *foundation.RetryConfig) {
   c.IsRetryableError = func(err error) bool {
@@ -141,7 +141,7 @@ foundation.Retry(func() error { do something that can fail }, isRetryableErrorCu
 To run code in a loop concurrently with a maximum of simultanuous running goroutines do the following:
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 // limit concurrency using a semaphore
 maxConcurrency := 5
@@ -166,7 +166,7 @@ semaphore.Wait()
 If you want to run Acquire within a `select` statement do so as follows:
 
 ```go
-import "github.com/estafette/estafette-foundation"
+import "github.com/ziplineeci/ziplinee-foundation"
 
 // limit concurrency using a semaphore
 maxConcurrency := 5

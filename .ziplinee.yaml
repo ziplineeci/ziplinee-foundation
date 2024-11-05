@@ -3,7 +3,7 @@ builder:
 
 labels:
   type: library
-  team: estafette-team
+  team: ziplinee-team
   language: golang
 
 version:
@@ -24,13 +24,12 @@ stages:
     image: golang:1.18-alpine
     commands:
     - apk add git
-    - git tag v${ESTAFETTE_BUILD_VERSION}
-    - git push origin v${ESTAFETTE_BUILD_VERSION}
+    - git tag v${ZIPLINEE_BUILD_VERSION}
+    - git push origin v${ZIPLINEE_BUILD_VERSION}
 
   slack-notify:
     image: extensions/slack-build-status:dev
-    workspace: estafette
+    workspace: ziplinee
     channels:
     - '#build-status'
-    when:
-      status == 'failed'
+    when: status == 'failed'
